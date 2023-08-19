@@ -1,0 +1,33 @@
+﻿@page
+@model RoyexTechApplication.Views.Shared._PopupMessageModel
+@{
+}
+<div class="modal fade" id="popupMessage" tabindex="-1" role="dialog" aria-labelledby="popupMessageLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupMessageLabel">Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>@ViewBag.Message</p>
+            </div>
+            <div class="modal-footer">
+                <button id="close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#popupMessage').modal('show');
+        $('#close').on('click', function () {
+            $('#popupMessage').modal('hide');
+        });
+    });
+</script>
+
+@Html.ActionLink("Go to Home", "Index", "Home")

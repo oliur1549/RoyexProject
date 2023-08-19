@@ -1,0 +1,27 @@
+﻿
+// Scaffold Code, use ur connection
+dotnet ef dbcontext scaffold "Data Source=Source-Name;Initial Catalog=DatabaseName;User ID=user;Password=Password;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir "Data/Entity" -ContextDir "Data" -Context "ApplicationDbContext" -t dbo.Employee -f
+
+
+
+
+// Create Table Script
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Employee](
+	[intEmployeeId] [int] NOT NULL,
+	[strEmployeeName] [nvarchar](max) NOT NULL,
+	[intManagerId] [int] NULL,
+	[strDesignation] [nvarchar](max) NOT NULL,
+	[numSalary] [decimal](18, 2) NULL,
+	[dteJoiningDate] [date] NOT NULL,
+	[IsBonusAdded] [bit] NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Employee] ADD  CONSTRAINT [DF_Employee_IsBonusAdded]  DEFAULT ((0)) FOR [IsBonusAdded]
+GO

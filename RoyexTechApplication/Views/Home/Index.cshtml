@@ -1,0 +1,76 @@
+﻿@model EmployeeDetails
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .highlighted-salary {
+        color: green !important; 
+        background-color: green;
+    }
+    .highlighted-name {
+        color: blue !important;
+        background-color: blue;
+    }
+</style>
+
+<form asp-controller="Home" asp-action="Index" method="get">
+    <p>
+        <input type="text" asp-for="EmployeeID" placeholder="Employee ID" />
+        <input type="submit" value="Show Salary With Bonus" />
+        
+    </p>    
+</form>
+<div>
+    <button id="salary">Highlight Salary</button>
+    <button id="name">Highlight Name</button>
+</div>
+
+<div id="employeeTable" class="text-center">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Salary With Bonus</th>
+                <th>Joining Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var employee in Model.EmployeeSalaryDetails)
+                {
+                    var salary = employee.BonusAmount + employee.ExtraAmount;
+                    <tr>
+                        <td>@employee.intEmployeeId</td>
+                        <td class="names">@employee.strEmployeeName</td>
+                        <td>@employee.strDesignation</td>
+                        <td class="sal">@salary</td>
+                        <td >@employee.dteJoiningDate</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5">No employee data available.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#salary').on('click', function () {
+            $('.sal').toggleClass('highlighted-salary');
+        });
+        $('#name').on('click', function () {
+            $('.names').toggleClass('highlighted-name');
+        });
+    });
+</script>
